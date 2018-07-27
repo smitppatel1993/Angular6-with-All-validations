@@ -1,0 +1,102 @@
+<div class="container">
+  <h1 class="header-style">{{title}}</h1>
+  <form #userForm="ngForm" novalidate class="example-form">
+    <!-- <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" [class.is-invalid-border]="name.invalid && name.touched" required #name="ngModel" name="name" [(ngModel)]="employeeModel.name">
+      <div *ngIf="name.touched && (name.invalid || name.errors)">
+        <small class="text-danger" *ngIf="name.errors.required">Name is required</small>
+      </div>
+    </div> -->
+    <div class="mb-3">
+      <mat-form-field class="example-full-width form-group">
+        <input class="form-group" matInput placeholder="Employee Name" required #name="ngModel" name="name" [(ngModel)]="employeeModel.name">
+        <mat-error *ngIf="name.touched && (name.invalid || name.errors)">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field class="example-full-width form-group">
+        <input class="form-group" matInput placeholder="Employee Email" name="email" required #email="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="employeeModel.email">
+        <mat-error *ngIf="email.touched && (email.invalid || email.errors)">
+          <span *ngIf="email.errors.required">Email is required</span>
+          <span *ngIf="email.errors.pattern">Email is Invalid</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- 
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" class="form-control" [class.is-invalid-border]="email.invalid && email.touched" name="email" required #email="ngModel" [(ngModel)]="employeeModel.email">
+      <div *ngIf="email.touched && (email.invalid || email.errors)">
+        <small class="text-danger" *ngIf="email.errors.required">Email is required</small>
+      </div>
+    </div> -->
+    <div class="mb-3">
+      <label>Salary</label>
+      <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="10000" min="10000" max="100000" style="width: 80%" #salary="ngModel"
+        name="salary" class="margin-left" [(ngModel)]="employeeModel.salary">
+      </mat-slider>
+      <label>{{employeeModel.salary | currency:'&#8377;'}}</label>
+    </div>
+    <!-- <div class="form-group">
+        <label>Salary</label>
+        <input type="tel" [class.is-invalid-border]="salary.invalid && salary.touched" pattern="^\d{10}$" required #salary="ngModel" class="form-control" name="salary" [(ngModel)]="employeeModel.salary" >
+        <div *ngIf="salary.touched && (salary.invalid || salary.errors)">
+          <small class="text-danger" *ngIf="salary.errors.required">Salary is required</small>
+          <small class="text-danger" *ngIf="salary.errors.pattern">Salary must be 10 digits</small>
+        </div>
+      </div> -->
+    <div class="mb-3" >
+      <mat-form-field class="example-full-width">
+        <mat-select placeholder="Department" [(ngModel)]="employeeModel.dept" name="dept" required #dept="ngModel">
+          <mat-option>Select Department</mat-option>
+          <mat-option *ngFor="let dept of depts" [value]="dept">
+            {{dept}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="dept.touched && (dept.invalid || dept.errors)">Please choose a department</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="mb-3 margin-top">
+      <label>Time Preferance</label>
+      <mat-radio-group class="example-radio-group margin-left" [(ngModel)]="employeeModel.timePreferance" name="timePreferance">
+        <mat-radio-button value="evening"> Evening </mat-radio-button>
+        <mat-radio-button value="morning" class="margin-left"> Morning </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="form-check mb-3 margin-top">
+      <!-- <input class="form-check-input" type="checkbox" id="subscribe" name="subscribe" [(ngModel)]="employeeModel.subscribe"> -->
+      <mat-checkbox id="subscribe" name="subscribe" [(ngModel)]="employeeModel.subscribe"> Employee wants PF or not.</mat-checkbox>
+      <!-- <label class="form-check-label margin-left" for="subscribe">
+          Send me offers
+        </label> -->
+    </div>
+    <div class="mb-3 margin-top">
+        <agm-map 
+        [latitude]="lat"
+        [longitude]="lng"
+        [zoom]="zoom"
+        [disableDefaultUI]="false"
+        [zoomControl]="false"
+        (mapClick)="mapClicked($event)">
+      
+        <agm-marker 
+            [latitude]="lats"
+            [longitude]="lngs"
+            [markerDraggable]="true"
+            (dragEnd)="markerDragEnd(m, $event)">
+        
+        </agm-marker>
+        
+      
+      </agm-map>
+    </div>
+    <div class="mb-3 margin-top">
+      <button mat-stroked-button color="primary" [disabled]="userForm.form.invalid" (click)="addNewEmployee()" type="submit" *ngIf="isUpdate == false">ADD EMPLOYEE</button>
+      <button mat-stroked-button color="primary" [disabled]="userForm.form.invalid" (click)="updateEmployee()" type="submit" *ngIf="isUpdate == true">UPDATE EMPLOYEE</button>
+      <button mat-stroked-button color="primary" style="float: right" [routerLink]="['/employee/list']" routerLinkActive="active" type="submit">Back to list</button>
+    </div>
+  </form>
+</div>

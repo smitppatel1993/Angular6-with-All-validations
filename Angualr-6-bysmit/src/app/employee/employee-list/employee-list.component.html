@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="col-sm-3 width-style" *ngFor="let emp of employeeData">
+    <div class="card">
+      <div class="content">
+        <h4>{{emp.name}}</h4>
+        <mat-divider></mat-divider>
+        <p><strong>Email : </strong> {{emp.email}}</p>
+        <p> <strong> Department : </strong> Angular</p>
+        <label class="label label-warning labal-style"><strong>Salary :</strong> <b> {{emp.salary}}</b> </label>
+        <p><strong>Shift : </strong> Morning</p>
+        <p><strong>Allow PF : </strong> 
+          <label class="label label-success labal-style" *ngIf="emp.subscribe"> Yes </label>
+          <label class="label label-danger labal-style" *ngIf="!emp.subscribe"> NO </label>
+        </p>
+        <button type="button" class="btn btn-default button-left" routerLinkActive="active" routerLink="/employee/edit/{{emp._id}}">Edit</button>
+        <button type="button" class="btn btn-default button-right" (click)="delete(emp._id)" >Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

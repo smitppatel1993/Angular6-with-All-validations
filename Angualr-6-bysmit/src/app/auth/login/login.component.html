@@ -1,0 +1,24 @@
+<div class="container">
+  <h1 class="header-style">ADMIN LOGIN</h1>
+  <form #userForm="ngForm" novalidate class="example-form">
+      <div class="mb-3">
+          <mat-form-field class="example-full-width form-group">
+            <input class="form-group" matInput placeholder="Admin Email" name="email" required #email="ngModel" [(ngModel)]="authModel.email">
+            <mat-error *ngIf="email.touched && (email.invalid || email.errors)">
+              Email is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="mb-3">
+            <mat-form-field class="example-full-width form-group">
+              <input class="form-group" type="password" matInput placeholder="Password" name="password" required #password="ngModel" [(ngModel)]="authModel.password">
+              <mat-error *ngIf="password.touched && (password.invalid || password.errors)">
+                  Password is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <button mat-stroked-button color="primary" [disabled]="userForm.form.invalid" (click)="login()" type="submit" >LOG IN</button>
+      
+  </form>
+</div>

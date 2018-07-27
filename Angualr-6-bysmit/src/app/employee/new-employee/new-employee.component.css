@@ -1,0 +1,30 @@
+.is-invalid-border{
+    border: 1px solid #a94442;
+}
+.margin-left{
+    margin-left: 10px;
+}
+.mat-radio-button ~ .mat-radio-button {
+    padding-right: 16px;
+  }
+
+  .example-form {
+    min-width: 150px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .margin-top{
+    margin-top: 10px;
+  }
+  .header-style{
+    font-size: 36px;
+    text-align: center;
+    border: 1px solid;
+    color: #8f3df2;
+  }
+  agm-map {
+    height: 300px;
+  }
